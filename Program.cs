@@ -7,7 +7,7 @@ namespace rps2
         static void Main()
         {
             Interface.GiveWelcomeMessage();
-            Array array = Interface.mainMenu(); 
+            int[] array = Interface.mainMenu(); 
         }
     }
 }

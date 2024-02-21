@@ -4,7 +4,7 @@ namespace rps2
 {
     internal class Sort
     {
-        public static Array SortEvenOdd2(int[] array, int[] sortedList)
+        public static int[] SortEvenOdd2(int[] array, int[] sortedList)
         {
             Array.Copy(array, sortedList, array.Length);
 

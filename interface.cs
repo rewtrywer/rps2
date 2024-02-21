@@ -15,6 +15,7 @@ namespace rps2
         {
             manual = 1,
             file,
+            test,
             exit
         }
 
@@ -28,18 +29,19 @@ namespace rps2
         public static void GiveMainMenu() 
         {
             Console.WriteLine("_______________________");
-            Console.WriteLine("1 - ручной ввод и сортировка");
-            Console.WriteLine("2 - добавление из файла и сортировка");
-            Console.WriteLine("3 - завершить программу");
+            Console.WriteLine("1 - Ручной ввод и сортировка");
+            Console.WriteLine("2 - Добавление из файла и сортировка");
+            Console.WriteLine("3 - Тестирование");
+            Console.WriteLine("4 - Завершить программу");
             Console.WriteLine("_______________________");
         }
 
         public static void GiveSaveMenu()
         {
             Console.WriteLine("_______________________");
-            Console.WriteLine("1 - сохранить исходный массив");
-            Console.WriteLine("2 - сохранить отсортированный массив");
-            Console.WriteLine("3 - вернуться в главное меню");
+            Console.WriteLine("1 - Сохранить исходный массив");
+            Console.WriteLine("2 - Сохранить отсортированный массив");
+            Console.WriteLine("3 - Вернуться в главное меню");
             Console.WriteLine("_______________________");
         }
 
@@ -53,8 +55,7 @@ namespace rps2
             /*Ввод с клавиатуры.*/
             for (int i = 0; i < size; i++)
             {
-                Console.WriteLine("Элемент {0}", i);
-                //array[i] = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Элемент {0}", i + 1);
                 array[i] = Checks.checkInt();
             }
             return array;
@@ -64,7 +65,7 @@ namespace rps2
         {
             for (int i = 0; i < size; i++)
             {
-                Console.WriteLine("{0} ", array[i]);
+                Console.WriteLine("{0}", array[i]);
             }
         }
 
@@ -104,30 +105,31 @@ namespace rps2
             }
         }
 
-        public static Array mainMenu()
+        public static int[] mainMenu()
         {
             while (true)
             {
                 GiveMainMenu();
-                if (int.TryParse(Console.ReadLine(), out int choice) && choice >= 1 && choice <= 3)
+                if (int.TryParse(Console.ReadLine(), out int choice) && choice >= 1 && choice <= 4)
                 {
                     item1 selection = (item1)choice;
                     int size = 0;
                     int[] array = new int[size];
                     int[] SortArray = new int[size];
+                    bool errFlagManual = true;
 
                     switch (selection)
                     {
                         case item1.manual:
                             Instuctions();
-                            bool r = true;
+                           
                             do
                             {
                                 if (int.TryParse(Console.ReadLine(), out size) && size >= 1)
                                 {
                                     Array.Resize(ref array, size);
                                     Array.Resize(ref SortArray, size);
-                                    
+
                                     AddArray(size, array);
 
                                     Console.WriteLine("___________________");
@@ -138,15 +140,15 @@ namespace rps2
                                     SeeArray(size, SortArray);
 
                                     Save(array, SortArray);
-                                    r = true;
+                                    errFlagManual = true;
                                 }
                                 else
                                 {
                                     Console.WriteLine("щшибка ввода. Попробуйте ещё раз.");
-                                    r = false;
+                                    errFlagManual = false;
                                 }
                                     
-                            } while (!r);
+                            } while (!errFlagManual);
 
                             break;
 
@@ -168,6 +170,17 @@ namespace rps2
                             }
 
                         break;
+                        case item1.test:
+                            bool test = Test.test1();
+                            if (test)
+                            {
+                                Console.WriteLine("Тест пройден.");
+                            }
+                            else
+                                Console.WriteLine("Тест не пройден.");
+
+                            break;
+                            
 
                         case item1.exit:
                             Environment.Exit(0);

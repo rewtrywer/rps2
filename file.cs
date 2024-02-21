@@ -67,9 +67,9 @@ namespace rps2
             }
         }
 
-        public static (int[] array, bool errFlag) AddArrayFromFile(int[] array, string filePath, bool f)
+        public static (int[] array, bool errFlag) AddArrayFromFile(int[] array, string filePath, bool errFlagFile)
         {
-            if (f)
+            if (errFlagFile)
             {
                 using (StreamReader reader = new StreamReader(filePath))
                 {
@@ -79,12 +79,12 @@ namespace rps2
                         array = array.Concat(new int[] { int.Parse(reader.ReadLine()) }).ToArray();
                     }
                 }
-                return (array, f);
+                return (array, errFlagFile);
             }
             else
             {
                 Console.WriteLine("Добавлен пустой массив");
-                return (array, f);
+                return (array, errFlagFile);
             }
         }
     }
