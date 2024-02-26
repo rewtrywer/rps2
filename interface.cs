@@ -11,7 +11,7 @@ namespace rps2
             Console.WriteLine("Задание: Отсортировать массив так, чтобы все чётные элементы были слева, а нечётные справа.");
         }
 
-        enum item1 
+        enum item1
         {
             manual = 1,
             file,
@@ -26,7 +26,7 @@ namespace rps2
             back
         }
 
-        public static void GiveMainMenu() 
+        public static void GiveMainMenu()
         {
             Console.WriteLine("_______________________");
             Console.WriteLine("1 - Ручной ввод и сортировка");
@@ -122,7 +122,7 @@ namespace rps2
                     {
                         case item1.manual:
                             Instuctions();
-                           
+
                             do
                             {
                                 if (int.TryParse(Console.ReadLine(), out size) && size >= 1)
@@ -147,7 +147,7 @@ namespace rps2
                                     Console.WriteLine("щшибка ввода. Попробуйте ещё раз.");
                                     errFlagManual = false;
                                 }
-                                    
+
                             } while (!errFlagManual);
 
                             break;
@@ -156,7 +156,7 @@ namespace rps2
 
                             string path = FileFunction.GetFilePath();
 
-                            (array, bool errFlag) =  FileFunction.AddArrayFromFile(array, path, Checks.IsValidFileForAddingArray(path));
+                            (array, bool errFlag) = FileFunction.AddArrayFromFile(array, path, Checks.IsValidFileForAddingArray(path));
                             if (errFlag)
                             {
                                 size = array.Count();
@@ -169,7 +169,7 @@ namespace rps2
                                 Save(array, SortArray);
                             }
 
-                        break;
+                            break;
                         case item1.test:
                             bool test = Test.test1();
                             if (test)
@@ -180,12 +180,12 @@ namespace rps2
                                 Console.WriteLine("Тест не пройден.");
 
                             break;
-                            
+
 
                         case item1.exit:
                             Environment.Exit(0);
 
-                        break;
+                            break;
                     }
                 }
                 else
